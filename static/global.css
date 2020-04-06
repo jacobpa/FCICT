@@ -1,0 +1,14 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0 auto;
+  width: 80vw;
+  min-width: 300px;
+  background-color: #ff6600;
+  color: white;
+  font-family: sans-serif;
+}
+
