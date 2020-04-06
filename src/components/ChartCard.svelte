@@ -1,18 +1,16 @@
 <script>
   import { onMount } from "svelte";
   import Chart from "chart.js";
+  import { chartData } from '../stores';
 
-  export let dataRequest;
+  let chart;
   let chartElement;
-  let loading = true;
 
   onMount(async () => {
-    const response = await dataRequest;
-
-    new Chart(chartElement, {
+    chart = new Chart(chartElement, {
       type: "line",
       data: {
-        datasets: response.data
+        datasets: $chartData
       },
       options: {
         maintainAspectRatio: false,
@@ -29,7 +27,10 @@
       }
     });
 
-    loading = false;
+    chartData.subscribe(data => {
+      chart.data.datasets = data;
+      chart.update();
+    });
   });
 </script>
 
@@ -57,8 +58,8 @@
 </style>
 
 <section>
-  {#if loading}
+  {#if $chartData == undefined}
     <div class="loading">LOADING...</div>
   {/if}
-  <canvas bind:this={chartElement} />
+  <canvas bind:this={chartElement} class={$chartData == undefined ? 'hidden' : ''}/>
 </section>
