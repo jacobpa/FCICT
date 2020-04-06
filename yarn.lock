@@ -792,6 +792,11 @@
     "@rollup/pluginutils" "^3.0.4"
     magic-string "^0.25.5"
 
+"@rollup/plugin-run@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@rollup/plugin-run/-/plugin-run-2.0.1.tgz#319aa6db45c4f1ce7e3eb093a654d99186e571b8"
+  integrity sha512-1RFeXWsvhIeLxmUj+5Gv2iYpiWWrquEc9b7nb9NzL7GmvNfX6nQtmVZ6Olq+30V1SQeWvOGno5FsPwJRIxh0wA==
+
 "@rollup/pluginutils@^3.0.0", "@rollup/pluginutils@^3.0.4", "@rollup/pluginutils@^3.0.6":
   version "3.0.8"
   resolved "https://registry.yarnpkg.com/@rollup/pluginutils/-/pluginutils-3.0.8.tgz#4e94d128d94b90699e517ef045422960d18c8fde"
