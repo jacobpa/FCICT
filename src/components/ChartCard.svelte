@@ -6,8 +6,8 @@
   let chart;
   let chartElement;
 
-  onMount(async () => {
-    chart = new Chart(chartElement, {
+  const createChart = () => {
+     chart = new Chart(chartElement, {
       type: "line",
       data: {
         datasets: $chartData
@@ -26,10 +26,16 @@
         }
       }
     });
+  }
 
+  onMount(async () => {
     chartData.subscribe(data => {
-      chart.data.datasets = data;
-      chart.update();
+      if (chart) {
+        chart.data.datasets = data;
+        chart.update();
+      } else {
+        createChart();
+      }
     });
   });
 </script>
