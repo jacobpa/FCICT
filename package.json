@@ -1,19 +1,26 @@
 {
   "name": "fcict",
+  "type": "module",
   "description": "Franklin County Inmate Population and COVID-19 Tracker",
   "version": "0.0.1",
   "scripts": {
     "dev": "sapper dev",
     "build": "sapper build --legacy",
     "export": "sapper export --legacy",
-    "start": "node __sapper__/build"
+    "start": "node __sapper__/build",
+    "fetch": "node --experimental-modules bin/fetch.js"
   },
   "dependencies": {
+    "FCICS": "jacobpa/FCICS",
     "axios": "^0.19.2",
     "chart.js": "^2.9.3",
     "compression": "^1.7.1",
+    "moment": "^2.24.0",
     "polka": "next",
-    "sirv": "^0.4.0"
+    "sirv": "^0.4.0",
+    "sql-template-strings": "^2.2.2",
+    "sqlite": "^4.0.5",
+    "sqlite3": "^4.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
