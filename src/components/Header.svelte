@@ -7,16 +7,9 @@
     text-align: center;
   }
 
-  header .title {
-    display: block;
-    text-transform: uppercase;
-    color: white;
-    font-size: 3.75rem;
-    font-weight: 900;
-    text-shadow: -1px -1px 0 black, -1px 1px 0 black, 1px -1px 0 black,
-      1px 1px 0 black, 2px 3px 0 black;
-  }
-
+.title {
+  margin: 0;
+}
   header .subtitle {
     display: block;
     width: 90%;
@@ -27,7 +20,7 @@
 </style>
 
 <header>
-  <span class="title">FCICT</span>
+  <h1 class="title">FCICT</h1>
   <span class="subtitle">
     Franklin County Inmate population and COVID-19 case Tracker
   </span>
