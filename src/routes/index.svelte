@@ -8,7 +8,7 @@ import ButtonBar from '../components/ButtonBar.svelte';
 
 let request;
 const getData = async (groupBy) => {
-    request = axios.get('http://192.168.2.11:3000/api/all?groupBy=' + groupBy);
+    request = axios.get('/api/all?groupBy=' + groupBy);
     const data = await request.then(response => response.data); 
     chartData.set(data);
 }
