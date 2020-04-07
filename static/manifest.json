@@ -1,18 +1,19 @@
 {
-	"background_color": "#ffffff",
-	"theme_color": "#333333",
-	"name": "TODO",
-	"short_name": "TODO",
-	"display": "minimal-ui",
+	"background_color": "#FF6600",
+	"theme_color": "#FF6600",
+	"name": "FCICT: Franklin County Inmate COVID-19 Tracker",
+	"short_name": "FCICT",
+	"description": "Franklin County Inmate population and COVID-19 case Tracker",
+	"display": "standalone",
 	"start_url": "/",
 	"icons": [
 		{
-			"src": "logo-192.png",
+			"src": "icon@192.png",
 			"sizes": "192x192",
 			"type": "image/png"
 		},
 		{
-			"src": "logo-512.png",
+			"src": "icon@512.png",
 			"sizes": "512x512",
 			"type": "image/png"
 		}
