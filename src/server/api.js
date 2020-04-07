@@ -35,12 +35,4 @@ router.get('/all', async (req, res) => {
   }
 });
 
-router.get('/covid', async (req, res) => {
-  res.send(await req.app.db.getCovid());
-});
-
-router.get('/inmates', async (req, res) => {
-  res.send(await req.app.db.getInmates());
-});
-
 export default router;
