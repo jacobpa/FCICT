@@ -1,45 +1,45 @@
 <script>
-  import { onMount } from "svelte";
-  import Chart from "chart.js";
-  import { chartData } from "../stores";
+  import { onMount } from 'svelte';
+  import Chart from 'chart.js';
+  import chartData from '../stores/chart';
 
   let chart;
   let chartElement;
 
   const createChart = () => {
     chart = new Chart(chartElement, {
-      type: "line",
+      type: 'line',
       data: {
-        datasets: $chartData
+        datasets: $chartData,
       },
       options: {
         maintainAspectRatio: false,
         scales: {
           xAxes: [
             {
-              type: "time",
+              type: 'time',
               time: {
-                unit: "day"
-              }
-            }
+                unit: 'day',
+              },
+            },
           ],
           yAxes: [
             {
-              id: "covid",
-              stacked: true
+              id: 'covid',
+              stacked: true,
             },
             {
-              id: "inmates",
-              stacked: true
-            }
-          ]
-        }
-      }
+              id: 'inmates',
+              stacked: true,
+            },
+          ],
+        },
+      },
     });
   };
 
   const updateScales = () => {
-    const {covid, inmates} = chart.scales;
+    const { covid, inmates } = chart.scales;
     const scaleMax = Math.max(covid.max, inmates.max);
 
     chart.options.scales.yAxes[0].ticks.max = scaleMax;
@@ -47,10 +47,10 @@
     chart.options.scales.yAxes[1].display = false;
 
     chart.update();
-  }
+  };
 
   onMount(async () => {
-    chartData.subscribe(data => {
+    chartData.subscribe((data) => {
       if (data && chart) {
         chart.data.datasets = data;
         updateScales();
@@ -86,10 +86,10 @@
 </style>
 
 <section>
-  {#if $chartData == undefined}
+  {#if $chartData === undefined}
     <div class="loading">LOADING...</div>
   {/if}
   <canvas
     bind:this={chartElement}
-    class={$chartData == undefined ? 'hidden' : ''} />
+    class={$chartData === undefined ? 'hidden' : ''} />
 </section>

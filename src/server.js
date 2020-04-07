@@ -11,23 +11,23 @@ const dev = NODE_ENV === 'development';
 
 const app = polka();
 
-const init = async() => {
-	const db = await FCICSDb.getDatabase();
+const init = async () => {
+  const db = await FCICSDb.getDatabase();
 
-	app.use((req, res, next) => {
-		req.db = db;
-		next();
-	});
-	
-	app.use(compression({threshold: 0}));
-	app.use(sirv('static', { dev }));
-	app.use('/api', apiRouter);
-	app.use(sapper.middleware());
+  app.use((req, res, next) => {
+    req.db = db;
+    next();
+  });
+
+  app.use(compression({ threshold: 0 }));
+  app.use(sirv('static', { dev }));
+  app.use('/api', apiRouter);
+  app.use(sapper.middleware());
 
 
-	app.listen(PORT, err => {
-		if (err) console.log('error', err);
-	});
-}
+  app.listen(PORT, (err) => {
+    if (err) console.log('error', err);
+  });
+};
 
 init();

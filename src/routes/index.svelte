@@ -1,18 +1,18 @@
 <script>
-  import axios from "axios";
-  import { chartData } from "../stores";
-  import Header from "../components/Header.svelte";
-  import Card from "../components/Card.svelte";
-  import ChartCard from "../components/ChartCard.svelte";
-  import ButtonBar from "../components/ButtonBar.svelte";
+  import axios from 'axios';
+  import chartData from '../stores/chart';
+  import Header from '../components/Header.svelte';
+  import Card from '../components/Card.svelte';
+  import ChartCard from '../components/ChartCard.svelte';
+  import ButtonBar from '../components/ButtonBar.svelte';
 
   let request;
-  const getData = async groupBy => {
-    request = axios.get("/api/all?groupBy=" + groupBy);
-    const data = await request.then(response => response.data);
+  const getData = async (groupBy) => {
+    request = axios.get(`/api/all?groupBy=${groupBy}`);
+    const data = await request.then((response) => response.data);
     chartData.set(data);
   };
-  getData("totals");
+  getData('totals');
 </script>
 
 <svelte:head>

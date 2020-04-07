@@ -1,5 +1,5 @@
 <script>
-export let hasTitle = true;
+  export let hasTitle = true;
 </script>
 
 <style>
