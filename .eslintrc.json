@@ -10,12 +10,22 @@
     "plugins": [
         "svelte3"
     ],
+    "rules": {
+        "import/no-extraneous-dependencies": "off"
+    },
+    "ignorePatterns": ["node_modules/", "service-worker.js", "*.html"],
+    "extends": "airbnb-base",
     "overrides": [
         {
             "files": ["**/*.svelte"],
-            "processor": "svelte3/svelte3"
+            "processor": "svelte3/svelte3",
+            "rules": {
+                "no-multiple-empty-lines": "off",
+                "indent": "off",
+                "import/first": "off",
+                "import/prefer-default-export": "off",
+                "import/no-mutable-exports": "off"
+            }
         }
-    ],
-    "ignorePatterns": ["node_modules/", "*.html"],
-    "extends": "airbnb-base"
+    ]
 }
