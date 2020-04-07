@@ -1,13 +1,13 @@
 <script>
   import { onMount } from "svelte";
   import Chart from "chart.js";
-  import { chartData } from '../stores';
+  import { chartData } from "../stores";
 
   let chart;
   let chartElement;
 
   const createChart = () => {
-     chart = new Chart(chartElement, {
+    chart = new Chart(chartElement, {
       type: "line",
       data: {
         datasets: $chartData
@@ -22,19 +22,41 @@
                 unit: "day"
               }
             }
+          ],
+          yAxes: [
+            {
+              id: "covid",
+              stacked: true
+            },
+            {
+              id: "inmates",
+              stacked: true
+            }
           ]
         }
       }
     });
+  };
+
+  const updateScales = () => {
+    const {covid, inmates} = chart.scales;
+    const scaleMax = Math.max(covid.max, inmates.max);
+
+    chart.options.scales.yAxes[0].ticks.max = scaleMax;
+    chart.options.scales.yAxes[1].ticks.max = scaleMax;
+    chart.options.scales.yAxes[1].display = false;
+
+    chart.update();
   }
 
   onMount(async () => {
     chartData.subscribe(data => {
-      if (chart) {
+      if (data && chart) {
         chart.data.datasets = data;
-        chart.update();
-      } else {
+        updateScales();
+      } else if (data && !chart) {
         createChart();
+        updateScales();
       }
     });
   });
@@ -67,5 +89,7 @@
   {#if $chartData == undefined}
     <div class="loading">LOADING...</div>
   {/if}
-  <canvas bind:this={chartElement} class={$chartData == undefined ? 'hidden' : ''}/>
+  <canvas
+    bind:this={chartElement}
+    class={$chartData == undefined ? 'hidden' : ''} />
 </section>
