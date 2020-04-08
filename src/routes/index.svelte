@@ -57,7 +57,7 @@
     text-align: center;
     display: grid;
     margin: 0 auto;
-    width: fit-content;
+    width: max-content;
   }
 
   .since-yesterday:first-of-type {
