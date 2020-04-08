@@ -63,7 +63,6 @@
     }
   }
 
-
   @media only screen and (min-width: 800px) and (max-width: 1349px) {
     .since-yesterday {
       grid-template-columns: repeat(2, max-content);
@@ -82,6 +81,10 @@
 
   .since-yesterday .value {
     font-size: 2rem;
+  }
+
+  .question:not(:last-child) {
+    margin-bottom: 1rem;
   }
 </style>
 
@@ -104,13 +107,29 @@
   </div>
 </Card>
 <Card>
-  <h2 slot=title>Since We Checked Yesterday</h2>
+  <h2 slot="title">Since We Checked Yesterday</h2>
   <div slot="body" class="since-yesterday">
     {#if sinceYesterday}
-      <h3><span class="value">{sinceYesterday.inmate_male}</span><br />Male Inmates</h3>
-      <h3><span class="value">{sinceYesterday.inmate_female}</span><br />Female Inmates</h3>
-      <h3><span class="value">{sinceYesterday.covid_male}</span><br />Male COVID-19 Cases</h3>
-      <h3><span class="value">{sinceYesterday.covid_female}</span><br />Female Covid-19 Cases</h3>
+      <h3>
+        <span class="value">{sinceYesterday.inmate_male}</span>
+        <br />
+        Male Inmates
+      </h3>
+      <h3>
+        <span class="value">{sinceYesterday.inmate_female}</span>
+        <br />
+        Female Inmates
+      </h3>
+      <h3>
+        <span class="value">{sinceYesterday.covid_male}</span>
+        <br />
+        Male COVID-19 Cases
+      </h3>
+      <h3>
+        <span class="value">{sinceYesterday.covid_female}</span>
+        <br />
+        Female Covid-19 Cases
+      </h3>
     {:else}
       <h3>Loading...</h3>
     {/if}
@@ -118,13 +137,16 @@
 </Card>
 <Card>
   <div slot="title">Questions?</div>
-  <div slot="body">
+  <div slot="body" class="questions">
+    <div class="question">
     <h3>Why?</h3>
     <p>
       There is a lot of talk nationwide about releasing nonvionlet or low-risk
       prisoners as a result of COVID-19. This aims to be a helpful tool to see
       how Franklin County, Ohio is responding.
     </p>
+    </div>
+    <div class="question">
     <h3>Where is this data coming from?</h3>
     <p>
       The inmate population is scraped from the Franklin County Sheriff's
@@ -134,30 +156,53 @@
         here as a CSV file
       </a>
       , the link to which can be found on the same page as the
-      <a href="https://coronavirus.ohio.gov/wps/portal/gov/covid-19/dashboards">
+        <a
+          href="https://coronavirus.ohio.gov/wps/portal/gov/covid-19/dashboards">
         Ohio Department of Health's Cronoavirus Dashboard
       </a>
       .
     </p>
+    </div>
+    <div class="question">
+      <h3>When will this update?</h3>
+      <p>
+        The Ohio Department of Health releases new COVID-19 data every day at
+        2:00 PM EST. This website will update at 2:15 AM, 8:15 AM, 2:15 PM, and
+        8:15 PM in order to (hopefully) always have the most recent COVID-19
+        data, and to have up-to-date inmate populations.
+      </p>
+    </div>
+    <div class="question">
     <h3>This data doesn't match up with the Ohio.gov dashboard!</h3>
     <p>
-      I know! The data which feeds that dashboard seems to be different than the
-      data that they provide, which this website sources. Don't know what
+        I know! The data which feeds that dashboard seems to be different than
+        the data that they provide, which this website sources. Don't know what
       dashboard I'm talking about? Check it out on the
-      <a href="https://coronavirus.ohio.gov/wps/portal/gov/covid-19/dashboards">
+        <a
+          href="https://coronavirus.ohio.gov/wps/portal/gov/covid-19/dashboards">
         Ohio Department of Health's website.
       </a>
     </p>
+    </div>
+    <div class="question">
     <h3>Why only Franklin County?</h3>
     <p>
-      More places or sources may be added in the future, but unfortunately there
-      isn't one easy place to gather all of this data. Especially the inmate
-      population, which took some work to gather and update automatically.
+        More places or sources may be added in the future, but unfortunately
+        there isn't one easy place to gather all of this data. Especially the
+        inmate population, which took some work to gather and update
+        automatically.
     </p>
+    </div>
+    <div class="question">
     <h3>How was this made?</h3>
     <p>
-      All of the code for this website, and the library which processes the data
-      it consumes is available under the Unlicense on my Github.
+        All of the code for this website, and the library which processes the
+        data it consumes is available under
+        <a href="https://unlicense.org">The Unlicense</a>
+        on
+        <a href="https://github.com/jacobpa/FCICT">Github</a>
+        .
     </p>
+  </div>
   </div>
 </Card>
