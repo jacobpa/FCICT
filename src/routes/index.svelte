@@ -1,4 +1,5 @@
 <script>
+  import { onMount } from 'svelte';
   import axios from 'axios';
   import chartData from '../stores/chart';
   import Header from '../components/Header.svelte';
@@ -6,14 +7,84 @@
   import ChartCard from '../components/ChartCard.svelte';
   import ButtonBar from '../components/ButtonBar.svelte';
 
-  let request;
-  const getData = async (groupBy) => {
-    request = axios.get(`/api/all?groupBy=${groupBy}`);
-    const data = await request.then((response) => response.data);
+  let chartDataRequest;
+  let sinceYesterday;
+
+  const stringWithSign = (value) => {
+    return `${value < 0 ? '' : '+'}${value}`;
+  }
+
+  const getChartData = async (groupBy) => {
+    chartDataRequest = axios.get(`/api/all?groupBy=${groupBy}`);
+    const data = await chartDataRequest.then((response) => response.data);
     chartData.set(data);
   };
-  getData('totals');
+
+  const getSinceYesterdayData = async() => {
+    const lastToday = await axios
+      .get('/api/last')
+      .then(response => response.data)
+      .catch(e => {
+        console.error(`Error getting most recent data for "Since Yesterday" article: ${e.message}`);
+      });
+    const lastYesterday = await axios
+      .get('/api/last?from=yesterday')     
+      .then(response => response.data)
+      .catch(e => {
+        console.error(`Error getting yesterday data for "Since Yesterday" article: ${e.message}`);
+      });
+
+    if (lastToday && lastYesterday) {
+      sinceYesterday = {
+        inmate_male: stringWithSign(lastToday.inmate_male - lastYesterday.inmate_male),
+        inmate_female: stringWithSign(lastToday.inmate_female - lastYesterday.inmate_female),
+        covid_male: stringWithSign(lastToday.covid_male - lastYesterday.covid_male),
+        covid_female: stringWithSign(lastToday.covid_female - lastYesterday.covid_female),
+      };
+    }
+  };
+
+  onMount(() => {
+    getChartData('totals');
+    getSinceYesterdayData();
+  });
 </script>
+
+<style>
+  .since-yesterday {
+    text-align: center;
+    display: grid;
+    margin: 0 auto;
+    width: fit-content;
+  }
+
+  @media only screen and (max-width: 799px) {
+    .since-yesterday {
+      grid-template-columns: 1fr;
+    }
+  }
+
+
+  @media only screen and (min-width: 800px) and (max-width: 1349px) {
+    .since-yesterday {
+      grid-template-columns: repeat(2, max-content);
+    }
+  }
+
+    @media only screen and (min-width: 1350px) {
+    .since-yesterday {
+      grid-template-columns: repeat(4, max-content);
+    }
+  }
+
+  .since-yesterday h3 {
+    padding: 0 1em;
+  }
+
+  .since-yesterday .value {
+    font-size: 2rem;
+  }
+</style>
 
 <svelte:head>
   <title>FCICT</title>
@@ -21,16 +92,29 @@
 
 <Header />
 <ChartCard />
-<Card>
+<Card hasTitle={false}>
   <div slot="body">
     <ButtonBar>
-      <button on:click|preventDefault={() => getData('genders')}>
+      <button on:click|preventDefault={() => getChartData('genders')}>
         View By Sex
       </button>
-      <button on:click|preventDefault={() => getData('totals')}>
+      <button on:click|preventDefault={() => getChartData('totals')}>
         View By Population Totals
       </button>
     </ButtonBar>
+  </div>
+</Card>
+<Card>
+  <h2 slot=title>Since We Checked Yesterday</h2>
+  <div slot="body" class="since-yesterday">
+    {#if sinceYesterday}
+      <h3><span class="value">{sinceYesterday.inmate_male}</span><br />Male Inmates</h3>
+      <h3><span class="value">{sinceYesterday.inmate_female}</span><br />Female Inmates</h3>
+      <h3><span class="value">{sinceYesterday.covid_male}</span><br />Male COVID-19 Cases</h3>
+      <h3><span class="value">{sinceYesterday.covid_female}</span><br />Female Covid-19 Cases</h3>
+    {:else}
+      <h3>Loading...</h3>
+    {/if}
   </div>
 </Card>
 <Card>
