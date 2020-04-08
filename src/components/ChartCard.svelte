@@ -86,7 +86,7 @@
 </style>
 
 <section>
-  {#if $chartData === undefined}
+  {#if !$chartData}
     <div class="loading">LOADING...</div>
   {/if}
   <canvas
