@@ -26,10 +26,20 @@
           yAxes: [
             {
               id: 'covid',
+              position: 'left',
+              scaleLabel: {
+                display: true,
+                labelString: 'Total County COVID-19 Cases'
+              },
               stacked: true,
             },
             {
               id: 'inmates',
+              position: 'right',
+              scaleLabel: {
+                display: true,
+                labelString: 'Inmate Count'
+              },
               stacked: true,
             },
           ],
@@ -44,7 +54,6 @@
 
     chart.options.scales.yAxes[0].ticks.max = scaleMax;
     chart.options.scales.yAxes[1].ticks.max = scaleMax;
-    chart.options.scales.yAxes[1].display = false;
 
     chart.update();
   };
@@ -72,7 +81,14 @@
     color: black;
     border: 1px solid black;
     box-shadow: 3px 4px 0 black;
+  }
+
+  .chart-container {
     height: 50vh;
+  }
+
+  .description {
+    text-align: center;
   }
 
   .loading {
@@ -89,7 +105,10 @@
   {#if !$chartData}
     <div class="loading">LOADING...</div>
   {/if}
-  <canvas
-    bind:this={chartElement}
-    class={$chartData === undefined ? 'hidden' : ''} />
+  <div class="chart-container">
+    <canvas
+      bind:this={chartElement}
+      class={$chartData === undefined ? 'hidden' : ''} />
+  </div>
+  <p class="description"><slot name="description" /></p>
 </section>

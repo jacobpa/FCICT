@@ -100,7 +100,12 @@
 </svelte:head>
 
 <Header />
-<ChartCard />
+<ChartCard>
+  <span slot="description">
+    The chart above displays the total inmate population in Franklin County, along with the total
+    count of COVID-19 cases.
+  </span>
+</ChartCard>
 <Card hasTitle={false}>
   <div slot="body">
     <ButtonBar>
