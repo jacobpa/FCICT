@@ -73,7 +73,7 @@ class FCICSDb {
       INNER JOIN Inmates as i
       WHERE c.date = i.date
       ORDER BY c.date DESC;
-    `)
+    `);
   }
 
   async getYesterday() {
@@ -88,7 +88,7 @@ class FCICSDb {
       )
       WHERE date(date, 'start of day') = date('now', 'localtime', 'start of day', '-1 day')
       ORDER BY date DESC;
-    `)
+    `);
   }
 }
 

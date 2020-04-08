@@ -10,9 +10,8 @@
   let chartDataRequest;
   let sinceYesterday;
 
-  const stringWithSign = (value) => {
-    return `${value < 0 ? '' : '+'}${value}`;
-  }
+  const stringWithSign = (value) => `${value < 0 ? '' : '+'}${value}`;
+
 
   const getChartData = async (groupBy) => {
     chartDataRequest = axios.get(`/api/all?groupBy=${groupBy}`);
@@ -20,17 +19,17 @@
     chartData.set(data);
   };
 
-  const getSinceYesterdayData = async() => {
+  const getSinceYesterdayData = async () => {
     const lastToday = await axios
       .get('/api/last')
-      .then(response => response.data)
-      .catch(e => {
+      .then((response) => response.data)
+      .catch((e) => {
         console.error(`Error getting most recent data for "Since Yesterday" article: ${e.message}`);
       });
     const lastYesterday = await axios
-      .get('/api/last?from=yesterday')     
-      .then(response => response.data)
-      .catch(e => {
+      .get('/api/last?from=yesterday')
+      .then((response) => response.data)
+      .catch((e) => {
         console.error(`Error getting yesterday data for "Since Yesterday" article: ${e.message}`);
       });
 

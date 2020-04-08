@@ -36,7 +36,7 @@ router.get('/all', async (req, res) => {
 });
 
 router.get('/last', async (req, res) => {
-  let dbResults; 
+  let dbResults;
   if (req.query.from === 'yesterday') {
     dbResults = await req.db.getYesterday();
   } else {
@@ -44,6 +44,6 @@ router.get('/last', async (req, res) => {
   }
   res.writeHead(200, 'application/json');
   res.end(JSON.stringify(dbResults));
-})
+});
 
 export default router;
