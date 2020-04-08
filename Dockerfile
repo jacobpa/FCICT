@@ -1,5 +1,8 @@
 FROM node:12-alpine
 
+RUN apk --no-cache add tzdata
+RUN cp /usr/share/zoneinfo/America/New_York /etc/localtime
+
 WORKDIR /fcict
 COPY . .
 RUN yarn install && yarn build
