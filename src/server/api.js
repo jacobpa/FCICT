@@ -42,7 +42,7 @@ router.get('/last', async (req, res) => {
   } else {
     dbResults = await req.db.getLast();
   }
-  res.writeHead(200, 'application/json');
+  res.writeHead(200, { 'Content-Type': 'application/json' });
   res.end(JSON.stringify(dbResults));
 });
 

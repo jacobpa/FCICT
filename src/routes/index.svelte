@@ -41,7 +41,7 @@
       };
       sinceYesterdayTotals = {
         inmate: stringWithSign(lastToday.inmate_male - lastYesterday.inmate_male + lastToday.inmate_female - lastYesterday.inmate_female),
-        covid: stringWithSign(lastToday.covid_male - lastYesterday.covid_male + lastToday.covid_female - lastYesterday.covid_female)
+        covid: stringWithSign(lastToday.covid_male - lastYesterday.covid_male + lastToday.covid_female - lastYesterday.covid_female),
       };
     }
   };
