@@ -13,6 +13,7 @@
   header .subtitle {
     display: block;
     width: 90%;
+    text-transform: capitalize;
     font-weight: 400;
     font-style: italic;
     font-size: 1.1rem;
@@ -22,6 +23,6 @@
 <header>
   <h1 class="title">FCICT</h1>
   <span class="subtitle">
-    Franklin County Inmate population and COVID-19 case Tracker
+    Franklin County Inmate Population and COVID-19 Case Tracker
   </span>
 </header>
