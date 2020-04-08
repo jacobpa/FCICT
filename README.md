@@ -7,6 +7,25 @@ in Franklin County, Ohio. It utilizes the similarly named library [FCICS](https:
 to fetch the data it displays.
 
 ### How can I use it?
+#### Docker
+Included in this repository is a Docker image that you can build and use to run the production
+version of this application on your local machine. It builds the project, and exposes the server on
+port `3000`.
+
+To build the image, run the following command in the project directory:
+```
+docker build -t fcict .
+```
+
+To run the image, you must provide the local port to map to, and provide the SQLite database as a
+volume:
+```
+LOCAL_PORT=3000
+DB_PATH=/path/to/fcics.db
+docker run -v $DB_PATH:/fcict/fcics.db -p $LOCAL_PORT:3000 --name fcict fcict
+```
+
+#### Locally
 You'll need to have Node.js, and SQLite3 installed in the environment in which you plan to run it on.
 Then, you can:
 
