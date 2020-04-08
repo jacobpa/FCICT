@@ -7,14 +7,13 @@
   import ChartCard from '../components/ChartCard.svelte';
   import ButtonBar from '../components/ButtonBar.svelte';
 
-  let chartDataRequest;
   let sinceYesterday;
+  let sinceYesterdayTotals;
 
   const stringWithSign = (value) => `${value < 0 ? '' : '+'}${value}`;
 
-
   const getChartData = async (groupBy) => {
-    chartDataRequest = axios.get(`/api/all?groupBy=${groupBy}`);
+    const chartDataRequest = axios.get(`/api/all?groupBy=${groupBy}`);
     const data = await chartDataRequest.then((response) => response.data);
     chartData.set(data);
   };
@@ -40,6 +39,10 @@
         covid_male: stringWithSign(lastToday.covid_male - lastYesterday.covid_male),
         covid_female: stringWithSign(lastToday.covid_female - lastYesterday.covid_female),
       };
+      sinceYesterdayTotals = {
+        inmate: stringWithSign(lastToday.inmate_male - lastYesterday.inmate_male + lastToday.inmate_female - lastYesterday.inmate_female),
+        covid: stringWithSign(lastToday.covid_male - lastYesterday.covid_male + lastToday.covid_female - lastYesterday.covid_female)
+      };
     }
   };
 
@@ -55,6 +58,10 @@
     display: grid;
     margin: 0 auto;
     width: fit-content;
+  }
+
+  .since-yesterday:first-of-type {
+    border-bottom: 1px solid black;
   }
 
   @media only screen and (max-width: 799px) {
@@ -108,31 +115,49 @@
 </Card>
 <Card>
   <h2 slot="title">Since We Checked Yesterday</h2>
-  <div slot="body" class="since-yesterday">
-    {#if sinceYesterday}
-      <h3>
-        <span class="value">{sinceYesterday.inmate_male}</span>
-        <br />
-        Male Inmates
-      </h3>
-      <h3>
-        <span class="value">{sinceYesterday.inmate_female}</span>
-        <br />
-        Female Inmates
-      </h3>
-      <h3>
-        <span class="value">{sinceYesterday.covid_male}</span>
-        <br />
-        Male COVID-19 Cases
-      </h3>
-      <h3>
-        <span class="value">{sinceYesterday.covid_female}</span>
-        <br />
-        Female Covid-19 Cases
-      </h3>
-    {:else}
-      <h3>Loading...</h3>
-    {/if}
+  <div slot="body">
+    <div class="since-yesterday">
+      {#if sinceYesterday}
+        <h3>
+          <span class="value">{sinceYesterday.inmate_male}</span>
+          <br />
+          Male Inmates
+        </h3>
+        <h3>
+          <span class="value">{sinceYesterday.inmate_female}</span>
+          <br />
+          Female Inmates
+        </h3>
+        <h3>
+          <span class="value">{sinceYesterday.covid_male}</span>
+          <br />
+          Male COVID-19 Cases
+        </h3>
+        <h3>
+          <span class="value">{sinceYesterday.covid_female}</span>
+          <br />
+          Female Covid-19 Cases
+        </h3>
+      {:else}
+        <h3>Loading...</h3>
+      {/if}
+    </div>
+    <div class="since-yesterday">
+      {#if sinceYesterdayTotals}
+        <h3>
+          <span class="value">{sinceYesterdayTotals.inmate}</span>
+          <br />
+          Total Inmates
+        </h3>
+        <h3>
+          <span class="value">{sinceYesterdayTotals.covid}</span>
+          <br />
+          Total COVID-19 Cases
+        </h3>
+      {:else}
+        <h3>Loading...</h3>
+      {/if}
+    </div>
   </div>
 </Card>
 <Card>
@@ -142,7 +167,7 @@
     <h3>Why?</h3>
     <p>
       There is a lot of talk nationwide about releasing nonvionlet or low-risk
-      prisoners as a result of COVID-19. This aims to be a helpful tool to see
+      inmates as a result of COVID-19. This aims to be a helpful tool to see
       how Franklin County, Ohio is responding.
     </p>
     </div>
