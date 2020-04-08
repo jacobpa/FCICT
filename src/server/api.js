@@ -35,4 +35,15 @@ router.get('/all', async (req, res) => {
   }
 });
 
+router.get('/last', async (req, res) => {
+  let dbResults; 
+  if (req.query.from === 'yesterday') {
+    dbResults = await req.db.getYesterday();
+  } else {
+    dbResults = await req.db.getLast();
+  }
+  res.writeHead(200, 'application/json');
+  res.end(JSON.stringify(dbResults));
+})
+
 export default router;

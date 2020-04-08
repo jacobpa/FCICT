@@ -63,6 +63,33 @@ class FCICSDb {
       'SELECT * FROM Covid;',
     );
   }
+
+  async getLast() {
+    return this.db.get(`
+      SELECT 
+        c.date, c.male as covid_male, c.female as covid_female,
+        i.male as inmate_male, i.female as inmate_female
+      FROM Covid as c
+      INNER JOIN Inmates as i
+      WHERE c.date = i.date
+      ORDER BY c.date DESC;
+    `)
+  }
+
+  async getYesterday() {
+    return this.db.get(`
+      SELECT * FROM (
+        SELECT 
+          c.date, c.male as covid_male, c.female as covid_female,
+          i.male as inmate_male, i.female as inmate_female
+        FROM Covid as c
+        INNER JOIN Inmates as i
+        WHERE c.date = i.date
+      )
+      WHERE date(date, 'start of day') = date('now', 'localtime', 'start of day', '-1 day')
+      ORDER BY date DESC;
+    `)
+  }
 }
 
 export default FCICSDb;
