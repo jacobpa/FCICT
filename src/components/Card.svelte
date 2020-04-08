@@ -15,6 +15,6 @@ section {
 </style>
 
 <section>
-{#if hasTitle}<h2 class='title'><slot name="title"></slot></h2>{/if}
-<slot name="body"></slot>
+{#if hasTitle}<h2 class='title'><slot name="title" /></h2>{/if}
+<div class="body"><slot name="body"/></div>
 </section>
