@@ -29,7 +29,7 @@
               position: 'left',
               scaleLabel: {
                 display: true,
-                labelString: 'Total County COVID-19 Cases'
+                labelString: 'Total County COVID-19 Cases',
               },
               stacked: true,
             },
@@ -38,7 +38,7 @@
               position: 'right',
               scaleLabel: {
                 display: true,
-                labelString: 'Inmate Count'
+                labelString: 'Inmate Count',
               },
               stacked: true,
             },
