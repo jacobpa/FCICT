@@ -1,14 +1,15 @@
 FROM node:12-alpine
 
-RUN apk --no-cache add tzdata
+RUN apk add --no-cache tzdata
 RUN cp /usr/share/zoneinfo/America/New_York /etc/localtime
 
 WORKDIR /fcict
-COPY . .
+RUN chown -R node:node /fcict
+USER node
+COPY --chown=node:node . .
+
 RUN yarn install && yarn build
-RUN rm -rf node_modules
 RUN yarn install --prod
-RUN yarn cache clean
 
 EXPOSE 3000
 
