@@ -9,7 +9,7 @@
     "export": "sapper export --legacy",
     "start": "node __sapper__/build",
     "fetch": "rollup --format cjs bin/fetch.js | node",
-    "lint": "eslint 'src/**'"
+    "lint": "eslint 'src/**' 'bin/**'"
   },
   "dependencies": {
     "FCICS": "jacobpa/FCICS",
