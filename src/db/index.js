@@ -9,7 +9,8 @@ const createTable = async (db) => {
     `CREATE TABLE IF NOT EXISTS Inmates (
             date DATE PRIMARY KEY,
             male INT NOT NULL,
-            female INT NOT NULL
+            female INT NOT NULL,
+            unknown INT NOT NULL
         )`,
   );
   db.run(
@@ -38,15 +39,15 @@ class FCICSDb {
         )`);
   }
 
-  async insertCovid(date, male, female) {
+  async insertCovid(date, male, female, unknown) {
     await this.db.run(SQL`INSERT INTO Covid VALUES (
-            ${date}, ${male}, ${female}
+            ${date}, ${male}, ${female}, ${unknown}
         )`);
   }
 
   async getAll() {
     return this.db.all(
-      `SELECT c.date, c.male AS covid_male, c.female AS covid_female, i.male AS inmates_male, i.female AS inmates_female
+      `SELECT c.date, c.male AS covid_male, c.female AS covid_female, c.unknown AS covid_unknown, i.male AS inmates_male, i.female AS inmates_female
             FROM Covid AS c
             INNER JOIN Inmates AS i ON c.date = i.date;`,
     );
@@ -67,7 +68,7 @@ class FCICSDb {
   async getLast() {
     return this.db.get(`
       SELECT 
-        c.date, c.male as covid_male, c.female as covid_female,
+        c.date, c.male as covid_male, c.female as covid_female, c.unknown as covid_unknown,
         i.male as inmate_male, i.female as inmate_female
       FROM Covid as c
       INNER JOIN Inmates as i
@@ -80,7 +81,7 @@ class FCICSDb {
     return this.db.get(`
       SELECT * FROM (
         SELECT 
-          c.date, c.male as covid_male, c.female as covid_female,
+          c.date, c.male as covid_male, c.female as covid_female, c.unknown as covid_unknown,
           i.male as inmate_male, i.female as inmate_female
         FROM Covid as c
         INNER JOIN Inmates as i

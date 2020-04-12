@@ -876,8 +876,8 @@
     "@types/node" "*"
 
 FCICS@jacobpa/FCICS:
-  version "2.0.0"
-  resolved "https://codeload.github.com/jacobpa/FCICS/tar.gz/c77c59b064b2721b5a123f3d35db533c3c223e8c"
+  version "2.1.0"
+  resolved "https://codeload.github.com/jacobpa/FCICS/tar.gz/b6f1d11866ff1e82a83573d374e77c6840d759bd"
   dependencies:
     cheerio "^1.0.0-rc.3"
     csvtojson "^2.0.10"

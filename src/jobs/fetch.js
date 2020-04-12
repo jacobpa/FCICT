@@ -24,7 +24,7 @@ const fetchAndStoreData = async () => {
     console.log('Fetching COVID-19 case data...');
 
     const cases = await cc.get();
-    db.insertCovid(now, cases.male, cases.female);
+    db.insertCovid(now, cases.male, cases.female, cases.unknown);
   } catch (err) {
     console.error(`Error pushing COVID-19 data to DB: ${err.message}`);
   }
