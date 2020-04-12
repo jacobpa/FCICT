@@ -18,7 +18,7 @@ const init = async () => {
 
   cron.schedule('15 2,8,14,20 * * *', () => {
     fetch();
-  }, { timezone: 'America/New_York' });
+  });
 
   app.use((req, res, next) => {
     req.db = db;
