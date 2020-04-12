@@ -38,6 +38,7 @@
         inmate_female: stringWithSign(lastToday.inmate_female - lastYesterday.inmate_female),
         covid_male: stringWithSign(lastToday.covid_male - lastYesterday.covid_male),
         covid_female: stringWithSign(lastToday.covid_female - lastYesterday.covid_female),
+        covid_unknown: stringWithSign(lastToday.covid_unknown - lastYesterday.covid_unknown),
       };
       sinceYesterdayTotals = {
         inmate: stringWithSign(lastToday.inmate_male - lastYesterday.inmate_male + lastToday.inmate_female - lastYesterday.inmate_female),
@@ -58,6 +59,7 @@
     display: grid;
     margin: 0 auto;
     width: max-content;
+    grid-template-rows: auto auto;
   }
 
   .since-yesterday:first-of-type {
@@ -79,6 +81,10 @@
     @media only screen and (min-width: 1350px) {
     .since-yesterday {
       grid-template-columns: repeat(4, max-content);
+    }
+
+    .since-yesterday h3.covid {
+      grid-row: 2 / 3;
     }
   }
 
@@ -133,15 +139,20 @@
           <br />
           Female Inmates
         </h3>
-        <h3>
+        <h3 class="covid">
           <span class="value">{sinceYesterday.covid_male}</span>
           <br />
           Male COVID-19 Cases
         </h3>
-        <h3>
+        <h3 class="covid">
           <span class="value">{sinceYesterday.covid_female}</span>
           <br />
           Female Covid-19 Cases
+        </h3>
+        <h3 class="covid">
+          <span class="value">{sinceYesterday.covid_unknown}</span>
+          <br />
+          Other Covid-19 Cases
         </h3>
       {:else}
         <h3>Loading...</h3>
