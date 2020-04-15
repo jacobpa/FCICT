@@ -1,16 +1,17 @@
-FROM node:12-alpine
+FROM node:12-alpine as build
+WORKDIR /src
+COPY . .
+RUN yarn install && yarn build && yarn install --prod
 
+FROM node:12-alpine as serve
 RUN apk add --no-cache tzdata
 RUN cp /usr/share/zoneinfo/America/New_York /etc/localtime
 
 WORKDIR /fcict
-RUN chown -R node:node /fcict
-USER node
-COPY --chown=node:node . .
-
-RUN yarn install && yarn build
-RUN yarn install --prod --force
+COPY --from=build /src/__sapper__ ./__sapper__
+COPY --from=build /src/node_modules ./node_modules
+COPY --from=build /src/static ./static
 
 EXPOSE 3000
 
-ENTRYPOINT yarn start
+ENTRYPOINT node __sapper__/build
