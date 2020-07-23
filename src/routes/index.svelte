@@ -124,7 +124,16 @@
         View By Population Totals
       </button>
     </ButtonBar>
+    <ButtonBar>
+      <div>
+        <label for="dateMin">Start Date</label>
+        <input id="dateMin" type="date" min={minDate} max={maxDate} bind:value={dateMin} />
       </div>
+      <div>
+        <label for="dateMax">End Date</label>
+        <input id="dateMax" type="date" min={minDate} max={maxDate} bind:value={dateMax} />
+      </div>
+    </ButtonBar>
   </div>
 </Card>
 <Card>
