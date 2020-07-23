@@ -19,6 +19,7 @@
         scales: {
           xAxes: [
             {
+              id: 'dates',
               type: 'time',
               time: {
                 unit: 'day',
@@ -59,6 +60,15 @@
 
     chart.update();
   };
+
+  const updateXAxes = () => {
+    const dates = chart.scales.dates;
+
+    chart.options.scales.xAxes[0].ticks.min = dateMin;
+    chart.options.scales.xAxes[0].ticks.max = dateMax;
+    
+    chart.update();
+  }
 
   onMount(async () => {
     chartData.subscribe((data) => {
