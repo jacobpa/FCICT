@@ -48,7 +48,7 @@
     });
   };
 
-  const updateScales = () => {
+  const updateYAxes = () => {
     const { covid, inmates } = chart.scales;
     const scaleMax = Math.max(covid.max, inmates.max);
 
@@ -62,10 +62,10 @@
     chartData.subscribe((data) => {
       if (data && chart) {
         chart.data.datasets = data;
-        updateScales();
+        updateYAxes();
       } else if (data && !chart) {
         createChart();
-        updateScales();
+        updateYAxes();
       }
     });
   });
