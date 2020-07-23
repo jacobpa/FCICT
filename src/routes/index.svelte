@@ -9,6 +9,10 @@
 
   let sinceYesterday;
   let sinceYesterdayTotals;
+  let dateMin;
+  let minDate;
+  let dateMax;
+  let maxDate;
 
   const stringWithSign = (value) => `${value < 0 ? '' : '+'}${value}`;
 
@@ -38,6 +42,16 @@
   onMount(() => {
     loadChartData('totals');
     loadSinceYesterdayData();
+
+    chartData.subscribe((data) => {
+      if (data) {
+        dateMin = data[0].data[0].x.split(" ")[0];
+        minDate = data[0].data[0].x.split(" ")[0];
+
+        dateMax = data[0].data[data[0].data.length - 1].x.split(" ")[0];
+        maxDate = data[0].data[data[0].data.length - 1].x.split(" ")[0];
+      }
+    });
   });
 </script>
 
@@ -94,7 +108,7 @@
 </svelte:head>
 
 <Header />
-<ChartCard>
+<ChartCard dateMin={dateMin} dateMax={dateMax}>
   <span slot="description">
     The chart above displays the total inmate population in Franklin County, along with the total
     count of COVID-19 cases.

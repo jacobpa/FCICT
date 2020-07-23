@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from 'svelte';
+  import { onMount, afterUpdate } from 'svelte';
   import Chart from 'chart.js';
   import chartData from '../stores/chart';
 
@@ -80,6 +80,12 @@
         updateYAxes();
       }
     });
+  });
+
+  afterUpdate(() => {
+    if (chart) {
+      updateXAxes();
+    }
   });
 </script>
 
