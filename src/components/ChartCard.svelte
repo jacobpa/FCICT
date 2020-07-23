@@ -5,6 +5,8 @@
 
   let chart;
   let chartElement;
+  export let dateMin;
+  export let dateMax;
 
   const createChart = () => {
     chart = new Chart(chartElement, {
