@@ -124,6 +124,7 @@
         View By Population Totals
       </button>
     </ButtonBar>
+      </div>
   </div>
 </Card>
 <Card>
