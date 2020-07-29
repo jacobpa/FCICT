@@ -1,5 +1,7 @@
 <script>
   import { onMount, afterUpdate } from 'svelte';
+  import axios from 'axios';
+
   import Chart from 'chart.js';
   import ButtonBar from './ButtonBar.svelte';
   import Card from './Card.svelte';
@@ -11,6 +13,12 @@
   export let dateMax;
   export let minDate;
   export let maxDate;
+
+  const getChartData = async (groupBy) => {
+    const chartDataRequest = axios.get(`/api/all?groupBy=${groupBy}`);
+    const data = await chartDataRequest.then((response) => response.data);
+    chartData.set(data);
+  };
 
   const createChart = () => {
     chart = new Chart(chartElement, {
@@ -127,6 +135,19 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+
+  div.date-select-table {
+    display: grid;
+    grid-column-gap: 0.5rem;
+    column-gap: 0.5rem;
+    grid-template-columns: repeat(2, max-content);
+    grid-template-rows: auto;
+  }
+
+  .date-select-table label {
+    text-align: right;
+    margin: auto 0;
   }
 </style>
 

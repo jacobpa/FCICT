@@ -114,7 +114,7 @@
     count of COVID-19 cases.
   </span>
 </ChartCard>
-<Card hasTitle={false}>
+<!-- <Card hasTitle={false}>
   <div slot="body">
     <ButtonBar>
       <button on:click|preventDefault={() => loadChartData('genders')}>
@@ -135,7 +135,7 @@
       </div>
     </ButtonBar>
   </div>
-</Card>
+</Card> -->
 <Card>
   <h2 slot="title">Since We Checked Yesterday</h2>
   <div slot="body">
