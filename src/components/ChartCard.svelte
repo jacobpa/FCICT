@@ -1,12 +1,16 @@
 <script>
   import { onMount, afterUpdate } from 'svelte';
   import Chart from 'chart.js';
+  import ButtonBar from './ButtonBar.svelte';
+  import Card from './Card.svelte';
   import chartData from '../stores/chart';
 
   let chart;
   let chartElement;
   export let dateMin;
   export let dateMax;
+  export let minDate;
+  export let maxDate;
 
   const createChart = () => {
     chart = new Chart(chartElement, {
@@ -67,6 +71,11 @@
     chart.options.scales.xAxes[0].ticks.min = dateMin;
     chart.options.scales.xAxes[0].ticks.max = dateMax;
     
+    if (!maxDate && !minDate) {
+      maxDate = dateMax;
+      minDate = dateMin;
+    }
+
     chart.update();
   }
 
@@ -75,9 +84,11 @@
       if (data && chart) {
         chart.data.datasets = data;
         updateYAxes();
+        updateXAxes();
       } else if (data && !chart) {
         createChart();
         updateYAxes();
+        updateXAxes();
       }
     });
   });
@@ -130,3 +141,25 @@
   </div>
   <p class="description"><slot name="description" /></p>
 </section>
+
+<Card hasTitle={false}>
+  <div slot="body">
+    <ButtonBar>
+      <button on:click|preventDefault={() => getChartData('genders')}>
+        View By Sex
+      </button>
+      <button on:click|preventDefault={() => getChartData('totals')}>
+        View By Population Totals
+      </button>
+      <div class="date-select-table">
+        <label for="dateMin">Start Date</label>
+        <input id="dateMin" type="date" min={minDate} max={maxDate} bind:value={dateMin} />
+        <label for="dateMax">End Date</label>
+        <input id="dateMax" type="date" min={minDate} max={maxDate} bind:value={dateMax} />
+      </div>
+    </ButtonBar>
+    <ButtonBar>
+
+    </ButtonBar>
+  </div>
+</Card>
