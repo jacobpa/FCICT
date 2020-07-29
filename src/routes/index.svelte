@@ -114,28 +114,6 @@
     count of COVID-19 cases.
   </span>
 </ChartCard>
-<!-- <Card hasTitle={false}>
-  <div slot="body">
-    <ButtonBar>
-      <button on:click|preventDefault={() => loadChartData('genders')}>
-        View By Sex
-      </button>
-      <button on:click|preventDefault={() => loadChartData('totals')}>
-        View By Population Totals
-      </button>
-    </ButtonBar>
-    <ButtonBar>
-      <div>
-        <label for="dateMin">Start Date</label>
-        <input id="dateMin" type="date" min={minDate} max={maxDate} bind:value={dateMin} />
-      </div>
-      <div>
-        <label for="dateMax">End Date</label>
-        <input id="dateMax" type="date" min={minDate} max={maxDate} bind:value={dateMax} />
-      </div>
-    </ButtonBar>
-  </div>
-</Card> -->
 <Card>
   <h2 slot="title">Since We Checked Yesterday</h2>
   <div slot="body">
