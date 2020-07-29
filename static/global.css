@@ -24,7 +24,7 @@ body {
   }
 }
 
-button {
+button, input {
   background-color: #33302e;
   color: white;
   font-weight: 500;
@@ -32,6 +32,8 @@ button {
   border-radius: 8px;
   padding: 0.75rem;
   margin: 0.25rem 0.25rem;
+  height: min-content;
+  font-family: inherit;
 }
 
 h1, h2 {
