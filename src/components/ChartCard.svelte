@@ -1,7 +1,7 @@
 <script>
   import { onMount, afterUpdate } from 'svelte';
-  import axios from 'axios';
 
+  import ApiClient from '../helpers/api';
   import Chart from 'chart.js';
   import ButtonBar from './ButtonBar.svelte';
   import Card from './Card.svelte';
@@ -15,8 +15,7 @@
   export let maxDate;
 
   const getChartData = async (groupBy) => {
-    const chartDataRequest = axios.get(`/api/all?groupBy=${groupBy}`);
-    const data = await chartDataRequest.then((response) => response.data);
+    const data = await ApiClient.getChartData(groupBy);
     chartData.set(data);
   };
 
