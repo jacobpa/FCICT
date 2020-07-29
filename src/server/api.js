@@ -3,7 +3,7 @@ import polka from 'polka';
 const router = polka();
 
 const colors = [
-  '#FF660064', '#ff873864', '#33302e64', '#44342964', '#887D7664'
+  '#FF660064', '#ff873864', '#33302e64', '#44342964', '#887D7664',
 ];
 
 router.get('/all', async (req, res) => {
@@ -27,7 +27,7 @@ router.get('/all', async (req, res) => {
     const uc = {
       label: 'Unknown Sex COVID-19 Cases', backgroundColor: colors[4], borderColor: colors[4], tension: 0, yAxisID: 'covid', fill: true, data: dbResults.map((e) => ({ x: e.date, y: e.covid_unknown })),
 
-    }
+    };
     const mi = {
       label: 'Male Inmates', backgroundColor: colors[0], borderColor: colors[0], tension: 0, yAxisID: 'inmates', fill: true, data: dbResults.map((e) => ({ x: e.date, y: e.inmates_male })),
     };
