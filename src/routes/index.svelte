@@ -204,18 +204,6 @@
       </p>
     </div>
     <div class="question">
-    <h3>This data doesn't match up with the Ohio.gov dashboard!</h3>
-    <p>
-        I know! The data which feeds that dashboard seems to be different than
-        the data that they provide, which this website sources. Don't know what
-      dashboard I'm talking about? Check it out on the
-        <a
-          href="https://coronavirus.ohio.gov/wps/portal/gov/covid-19/dashboards">
-        Ohio Department of Health's website.
-      </a>
-    </p>
-    </div>
-    <div class="question">
     <h3>Why only Franklin County?</h3>
     <p>
         More places or sources may be added in the future, but unfortunately
