@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte';
-  import axios from 'axios';
   import chartData from '../stores/chart';
+  import ApiClient from '../helpers/api';
   import Header from '../components/Header.svelte';
   import Card from '../components/Card.svelte';
   import ChartCard from '../components/ChartCard.svelte';
@@ -12,25 +12,13 @@
 
   const stringWithSign = (value) => `${value < 0 ? '' : '+'}${value}`;
 
-  const getChartData = async (groupBy) => {
-    const chartDataRequest = axios.get(`/api/all?groupBy=${groupBy}`);
-    const data = await chartDataRequest.then((response) => response.data);
+  const loadChartData = async (groupBy) => {
+    const data = await ApiClient.getChartData(groupBy);
     chartData.set(data);
   };
 
-  const getSinceYesterdayData = async () => {
-    const lastToday = await axios
-      .get('/api/last')
-      .then((response) => response.data)
-      .catch((e) => {
-        console.error(`Error getting most recent data for "Since Yesterday" article: ${e.message}`);
-      });
-    const lastYesterday = await axios
-      .get('/api/last?from=yesterday')
-      .then((response) => response.data)
-      .catch((e) => {
-        console.error(`Error getting yesterday data for "Since Yesterday" article: ${e.message}`);
-      });
+  const loadSinceYesterdayData = async () => {
+    const { lastToday, lastYesterday } = await ApiClient.getSinceYesterdayData();
 
     if (lastToday && lastYesterday) {
       sinceYesterday = {
@@ -48,8 +36,8 @@
   };
 
   onMount(() => {
-    getChartData('totals');
-    getSinceYesterdayData();
+    loadChartData('totals');
+    loadSinceYesterdayData();
   });
 </script>
 
@@ -115,10 +103,10 @@
 <Card hasTitle={false}>
   <div slot="body">
     <ButtonBar>
-      <button on:click|preventDefault={() => getChartData('genders')}>
+      <button on:click|preventDefault={() => loadChartData('genders')}>
         View By Sex
       </button>
-      <button on:click|preventDefault={() => getChartData('totals')}>
+      <button on:click|preventDefault={() => loadChartData('totals')}>
         View By Population Totals
       </button>
     </ButtonBar>
