@@ -14,7 +14,7 @@
   "dependencies": {
     "FCICS": "jacobpa/FCICS",
     "compression": "^1.7.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "node-cron": "^2.0.3",
     "polka": "next",
     "rollup": "^1.20.0",
