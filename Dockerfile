@@ -1,9 +1,10 @@
-FROM node:12-alpine as build
+FROM node:16-alpine as build
 WORKDIR /src
 COPY . .
+RUN apk add --no-cache git python3 ca-certificates make g++ && ln -s /usr/bin/python3 /usr/bin/python
 RUN yarn install && yarn build && yarn install --prod
 
-FROM node:12-alpine as serve
+FROM node:16-alpine as serve
 RUN apk add --no-cache tzdata
 RUN cp /usr/share/zoneinfo/America/New_York /etc/localtime
 
