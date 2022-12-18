@@ -2,7 +2,7 @@
 ## Franklin County Inmate and COVID-19 Tracker
 
 ### What is this?
-This is a web application to display the number of cases of COVID-19 and the number of inmates
+This is a web application to display the number of COVID-19 cases and the number of county jail inmates
 in Franklin County, Ohio. It utilizes the similarly named library [FCICS](https://github.com/jacobpa/FCICS)
 to fetch the data it displays.
 

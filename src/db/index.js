@@ -78,6 +78,7 @@ class FCICSDb {
   }
 
   async getYesterday() {
+    // Data has been truncated to stop at 2020/11/18, so 'yesterday' has become 2020/11/17
     return this.db.get(`
       SELECT * FROM (
         SELECT 
@@ -87,7 +88,7 @@ class FCICSDb {
         INNER JOIN Inmates as i
         WHERE c.date = i.date
       )
-      WHERE date(date, 'start of day') = date('now', 'localtime', 'start of day', '-1 day')
+      WHERE date(date, 'start of day') = date('2020-11-17', 'start of day')
       ORDER BY date DESC;
     `);
   }

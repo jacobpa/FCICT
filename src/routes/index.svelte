@@ -5,7 +5,6 @@
   import Header from '../components/Header.svelte';
   import Card from '../components/Card.svelte';
   import ChartCard from '../components/ChartCard.svelte';
-  import ButtonBar from '../components/ButtonBar.svelte';
 
   let sinceYesterday;
   let sinceYesterdayTotals;
@@ -115,7 +114,7 @@
   </span>
 </ChartCard>
 <Card>
-  <h2 slot="title">Since We Checked Yesterday</h2>
+  <h2 slot="title">Since We Checked Last</h2>
   <div slot="body">
     <div class="since-yesterday">
       {#if sinceYesterday}
@@ -172,16 +171,21 @@
     <div class="question">
     <h3>Why?</h3>
     <p>
-      There is a lot of talk nationwide about releasing nonvionlet or low-risk
-      inmates as a result of COVID-19. This aims to be a helpful tool to see
-      how Franklin County, Ohio is responding.
+      Early during the pandemic,
+      <a href="https://www.cnn.com/2020/03/16/us/inmates-released-jail-coronavirus-trnd/index.html">both in national</a>
+      and 
+      <a href="https://abc6onyourside.com/news/local/ohio-prisons-inmates-dealing-with-covid-19-pandemic-in-close-quarters">in local news</a>,
+      there were stories published reporting the decision of some Ohio counties to release nonviolent and low-risk inmates in response to the
+      growing number of COVID-19 cases.
+      This tool tracked the total inmate population
+      and total COVID-19 cases in Franklin County, Ohio to try and see what, if any, impact COVID-19 appeared to have.
     </p>
     </div>
     <div class="question">
-    <h3>Where is this data coming from?</h3>
+    <h3>Where did this data come from?</h3>
     <p>
-      The inmate population is scraped from the Franklin County Sheriff's
-      Booking website. The COVID-19 data is provided by the state of Ohio, and
+      The inmate population data was scraped from the Franklin County Sheriff's
+      Booking website, and as a result <strong>may not be a wholly accurate representation of prison population</strong>. The COVID-19 data was provided by the state of Ohio, and
       is available directly
       <a href="https://coronavirus.ohio.gov/static/COVIDSummaryData.csv">
         here as a CSV file
@@ -197,8 +201,11 @@
     <div class="question">
       <h3>When will this update?</h3>
       <p>
-        The Ohio Department of Health releases new COVID-19 data every day at
-        2:00 PM EST. This website will update at 2:15 AM, 8:15 AM, 2:15 PM, and
+        <strong>This tool stopped checking for new data on November 19, 2020.</strong>
+      </p>
+      <p>
+        The Ohio Department of Health released new COVID-19 data every day at
+        2:00 PM EST. This website updated daily at 2:15 AM, 8:15 AM, 2:15 PM, and
         8:15 PM in order to (hopefully) always have the most recent COVID-19
         data, and to have up-to-date inmate populations.
       </p>
@@ -206,10 +213,8 @@
     <div class="question">
     <h3>Why only Franklin County?</h3>
     <p>
-        More places or sources may be added in the future, but unfortunately
-        there isn't one easy place to gather all of this data. Especially the
-        inmate population, which took some work to gather and update
-        automatically.
+        Unfortunately
+        there wasn't one easy place to gather all of the data used by this tool.
     </p>
     </div>
     <div class="question">
